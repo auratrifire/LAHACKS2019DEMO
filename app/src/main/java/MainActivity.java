@@ -108,10 +108,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         frameLayout = (FrameLayout)findViewById(R.id.camera_preview);
+        while(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 1);
+        }
 
-        camera = Camera.open();
-        cameraPreview = new CameraPreview(this, this.camera);
-        frameLayout.addView(cameraPreview);
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            camera = Camera.open();
+            cameraPreview = new CameraPreview(this, this.camera);
+            frameLayout.addView(cameraPreview);
+        }
 
     }
 
