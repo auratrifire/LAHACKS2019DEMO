@@ -1,4 +1,5 @@
 import android.content.Context;
+import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -27,18 +28,37 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
+
+        Camera.Parameters params = mCamera.getParameters();
+        if(this.getResources().getConfiguration().orientation!= Configuration.ORIENTATION_LANDSCAPE)
+        {
+            params.set("orientation", "portrait");
+            mCamera.setDisplayOrientation(90);
+            params.setRotation(90);
+        }
+        else
+        {
+            params.set("orientation", "landscape");
+            mCamera.setDisplayOrientation(0);
+            params.setRotation(0);
+        }
+
+        mCamera.setParameters(params);
+
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
-    }
 
+
+    }
+@Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         // empty. Take care of releasing the Camera preview in your activity.
     }
-
+@Override
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.

@@ -10,14 +10,17 @@ import android.widget.FrameLayout;
 public class MainActivity extends AppCompatActivity {
 
     Camera camera;
+    CameraPreview cameraPreview;
     FrameLayout frameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = (FrameLayout)findViewById(R.id.frameLayout);
+        frameLayout = findViewById(R.id.frameLayout);
 
         camera = Camera.open();
+        cameraPreview = new CameraPreview(this.camera);
+        frameLayout.addView(cameraPreview);
     }
     private boolean checkCameraHardware(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
