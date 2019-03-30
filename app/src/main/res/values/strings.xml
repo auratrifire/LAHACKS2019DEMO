@@ -2,4 +2,6 @@
     <string name="app_name">My Application, Hello!</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
+    <string name="title_activity_camera">Camera</string>
+    <string name="title_activity_camera_preview">CameraPreview</string>
 </resources>
