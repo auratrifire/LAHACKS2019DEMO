@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +19,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +36,7 @@ public class CameraFunction extends AppCompatActivity {
     Camera camera;
     CameraPreview cameraPreview;
     FrameLayout frameLayout;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
     private static File getOutputMediaFile() {
@@ -57,7 +61,7 @@ public class CameraFunction extends AppCompatActivity {
 
             File pictureFile = getOutputMediaFile();
             if (pictureFile == null) {
-                Log.d(TAG, "Error creating media file, check storage permissions");
+                Log.e(TAG, "Error creating media file, check storage permissions");
                 return;
             }
 
@@ -65,10 +69,11 @@ public class CameraFunction extends AppCompatActivity {
                 FileOutputStream fos = new FileOutputStream(pictureFile);
                 fos.write(data);
                 fos.close();
+                Log.e(TAG, "I should've taken a picture");
             } catch (FileNotFoundException e) {
-                Log.d(TAG, "File not found: " + e.getMessage());
+                Log.e(TAG, "File not found: " + e.getMessage());
             } catch (IOException e) {
-                Log.d(TAG, "Error accessing file: " + e.getMessage());
+                Log.e(TAG, "Error accessing file: " + e.getMessage());
             }
         }
     };
@@ -183,15 +188,31 @@ public class CameraFunction extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             // get an image from the camera
-                            camera.takePicture(null, null, mPicture);
+                            camera.takePicture(null, null, null, new Camera.PictureCallback(){
+                                @Override
+                                public void onPictureTaken(byte[] data, Camera camera) {
+                                    Log.e(TAG, "this works");
+                                    ImageView img = findViewById(R.id.imageView);
+                                    img.setVisibility(View.VISIBLE);
+                                    Bitmap imageBitmap = (Bitmap) BitmapFactory.decodeByteArray(data, 0, data.length);
+                                    img.setImageBitmap(imageBitmap);
+                                    Log.e(TAG, "I tbitmap");
+                                }
+
+                            });
                             camera.stopPreview();
                             camera.startPreview();
+                            Log.e(TAG, "I took a picture");
+                            Intent intent = new Intent(CameraFunction.this, VisionActivity.class);
+                            startActivity(intent);
                         }
                     }
             );
 
 
         }
+
+
 
         Button gallery_button = findViewById(R.id.galleryButton);
         gallery_button.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +222,22 @@ public class CameraFunction extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    public void storePicture(){
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Log.e(TAG, "this works");
+            ImageView img = findViewById(R.id.imageView3);
+            img.setVisibility(View.VISIBLE);
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            img.setImageBitmap(imageBitmap);
+        }
 
     }
 }
