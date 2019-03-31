@@ -34,7 +34,7 @@ android {
     }
 }
 
-configurations{
+configurations {
     all*.exclude module: 'guava-jdk5'
 }
 dependencies {
