@@ -6,4 +6,5 @@
     <string name="landing_text">PLACEHOLDER</string>
     <string name="title_activity_camera">Camera</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
+    <string name="galleryButton" translatable="false">Gallery</string>
 </resources>

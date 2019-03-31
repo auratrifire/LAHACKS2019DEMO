@@ -64,11 +64,6 @@ public class Camira extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Button butt = findViewById(R.id.button);
-            butt.setVisibility(View.GONE);
-            FrameLayout cam = findViewById(R.id.main_camera);
-            cam.setVisibility(View.GONE);
-
             ImageView img = findViewById(R.id.imageView3);
             img.setVisibility(View.VISIBLE);
             Bundle extras = data.getExtras();

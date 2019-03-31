@@ -44,12 +44,15 @@
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:text="@string/string_start_learning_today"
+            android:textSize="24sp"
             app:fontFamily="@font/comfortaa_bold" />
 
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="match_parent"
+            android:layout_width="228dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/languageselect"
+            android:dropDownWidth="wrap_content"
             android:entries="@array/Languages"
             android:spinnerMode="dropdown" />
 
