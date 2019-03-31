@@ -1,15 +1,16 @@
 package com.example.nicklin.myapplication;
 
-import android.app.Activity;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
 
-public class CameraActivity extends Activity {
+public class CameraActivity extends AppCompatActivity {
 
     private Camera mCamera;
     private CameraPreview mPreview;
+
 
     public static Camera getCameraInstance(){
         Camera c = null;
