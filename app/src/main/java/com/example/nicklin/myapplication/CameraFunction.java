@@ -32,7 +32,7 @@ import static android.content.ContentValues.TAG;
 
 public class CameraFunction extends AppCompatActivity {
 
-
+    String choice = "";
     Camera camera;
     CameraPreview cameraPreview;
     FrameLayout frameLayout;
@@ -162,6 +162,9 @@ public class CameraFunction extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_camira);
+
+        Intent i = getIntent();
+        choice = i.getStringExtra("LANG");
         frameLayout = (FrameLayout)findViewById(R.id.main_camera);
         while(ContextCompat.checkSelfPermission(this,
 
@@ -191,12 +194,12 @@ public class CameraFunction extends AppCompatActivity {
                             camera.takePicture(null, null, null, new Camera.PictureCallback(){
                                 @Override
                                 public void onPictureTaken(byte[] data, Camera camera) {
-                                    Log.e(TAG, "this works");
-                                    ImageView img = findViewById(R.id.imageView);
-                                    img.setVisibility(View.VISIBLE);
-                                    Bitmap imageBitmap = (Bitmap) BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    img.setImageBitmap(imageBitmap);
-                                    Log.e(TAG, "I tbitmap");
+//                                    Log.e(TAG, "this works");
+//                                    //ImageView img = findViewById(R.id.imageView);
+//                                    img.setVisibility(View.VISIBLE);
+//                                    Bitmap imageBitmap = (Bitmap) BitmapFactory.decodeByteArray(data, 0, data.length);
+//                                    img.setImageBitmap(imageBitmap);
+//                                    Log.e(TAG, "I tbitmap");
                                 }
 
                             });
@@ -204,6 +207,7 @@ public class CameraFunction extends AppCompatActivity {
                             camera.startPreview();
                             Log.e(TAG, "I took a picture");
                             Intent intent = new Intent(CameraFunction.this, VisionActivity.class);
+                            intent.putExtra("LANG", choice);
                             startActivity(intent);
                         }
                     }
@@ -219,6 +223,7 @@ public class CameraFunction extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CameraFunction.this, VisionActivity.class);
+                intent.putExtra("LANG", choice);
                 startActivity(intent);
             }
         });
