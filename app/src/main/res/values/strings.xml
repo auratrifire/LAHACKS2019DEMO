@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">My Application, Hello!</string>
+    <string name="app_name">Learnpic</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="title_activity_vision">VisionActivity</string>
+    <string name="string_start_learning_today">Start learning today...</string>
+    <string name="landing_text">PLACEHOLDER</string>
+    <string name="title_activity_camera">Camera</string>
+    <string name="title_activity_camera_preview">CameraPreview</string>
+    <string name="galleryButton" translatable="false">Gallery</string>
 </resources>
