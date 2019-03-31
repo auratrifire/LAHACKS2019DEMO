@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
+    android:background="@drawable/background_color"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
     tools:context=".MainActivity">
 
     <TextView
@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textStyle="bold"
-        android:textSize="20sp"
         android:gravity="center"
-        android:text="Selected Image "/>
+        android:text="Selected Image "
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/selected_image"
@@ -26,24 +26,28 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/selected_image_txt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/labels"
-        android:text="Labels:"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selected_image"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Labels:"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_label_results"
-        android:text="-"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/labels"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="-"
+        android:textSize="18sp" />
 
     <!--<TextView-->
     <!--android:id="@+id/texts"-->
@@ -62,33 +66,32 @@
     <!--android:layout_below="@+id/texts"-->
     <!--android:layout_marginTop="10dp"/>-->
 
-    <TextView
-        android:id="@+id/locals"
-        android:text="Locals: "
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_label_results"
-        android:layout_marginTop="10dp"/>
+    <!--<TextView-->
+        <!--android:id="@+id/locals"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/tv_label_results"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:text="Locals: "-->
+        <!--android:textStyle="bold" />-->
 
-    <TextView
-        android:id="@+id/tv_local_results"
-        android:text="-"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/locals"
-        android:layout_marginTop="10dp"/>
+    <!--<TextView-->
+        <!--android:id="@+id/tv_local_results"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/locals"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:text="-"-->
+        <!--android:textStyle="bold" />-->
 
     <Button
         android:id="@+id/select_image_button"
-        android:layout_width="wrap_content"
+        android:layout_width="178dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Choose an Image"/>
-
-
+        android:background="@drawable/round_button"
+        android:text="Choose an Image" />
 
 
 </RelativeLayout>

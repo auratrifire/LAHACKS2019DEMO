@@ -92,17 +92,220 @@ public class VisionActivity extends AppCompatActivity {
     private TextView localResults;
     private ImageView img;
 
+    public String choice = "";
+
+    private String translateAccro = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vision);
 
+        Intent i = getIntent();
+        choice = i.getStringExtra("LANG");
+
+        switch(choice){
+            case "Afrikaans":
+                translateAccro = "af";
+                break;
+            case "Albanian":
+                translateAccro = "sq";
+                break;
+            case "Aranic":
+                translateAccro = "ar";
+                break;
+            case "Azerbaijani":
+                translateAccro = "az";
+                break;
+            case "Basque":
+                translateAccro = "eu";
+                break;
+            case "Bengali":
+                translateAccro = "bn";
+                break;
+            case "Belarusian":
+                translateAccro = "be";
+                break;
+            case "Bulgarian":
+                translateAccro = "bg";
+                break;
+            case "Catalan":
+                translateAccro = "ca";
+                break;
+            case "Chinese Simplified":
+                translateAccro = "zh-CN";
+                break;
+            case "Chinese Traditional":
+                translateAccro = "zh-TW";
+                break;
+            case "Croatian":
+                translateAccro = "hr";
+                break;
+            case "Czech":
+                translateAccro = "cs";
+                break;
+            case "Danish":
+                translateAccro = "da";
+                break;
+            case "Dutch":
+                translateAccro = "nl";
+                break;
+            case "English":
+                translateAccro = "en";
+                break;
+            case "Esperanto":
+                translateAccro = "eo";
+                break;
+            case "Estonian":
+                translateAccro = "et";
+                break;
+            case "Filipino":
+                translateAccro = "tl";
+                break;
+            case "Finnish":
+                translateAccro = "fi";
+                break;
+            case "French":
+                translateAccro = "fr";
+                break;
+            case "Galician":
+                translateAccro = "gl";
+                break;
+            case "Georgian":
+                translateAccro = "ka";
+                break;
+            case "German":
+                translateAccro = "de";
+                break;
+            case "Greek":
+                translateAccro = "el";
+                break;
+            case "Gujarati":
+                translateAccro = "gu";
+                break;
+            case "Haitian Creole":
+                translateAccro = "ht";
+                break;
+            case "Hebrew":
+                translateAccro = "iw";
+                break;
+            case "Hindi":
+                translateAccro = "hi";
+                break;
+            case "Hungarian":
+                translateAccro = "hu";
+                break;
+            case "Icelandic":
+                translateAccro = "is";
+                break;
+            case "Indonesian":
+                translateAccro = "id";
+                break;
+            case "Irish":
+                translateAccro = "ga";
+                break;
+            case "Italian":
+                translateAccro = "it";
+                break;
+            case "Japanese":
+                translateAccro = "ja";
+                break;
+            case "Kannada":
+                translateAccro = "kn";
+                break;
+            case "Korean":
+                translateAccro = "ko";
+                break;
+            case "Latin":
+                translateAccro = "la";
+                break;
+            case "Latvian":
+                translateAccro = "lv";
+                break;
+            case "Lithuanian":
+                translateAccro = "lt";
+                break;
+            case "Macedonian":
+                translateAccro = "mk";
+                break;
+            case "Malay":
+                translateAccro = "ms";
+                break;
+            case "Maltese":
+                translateAccro = "mt";
+                break;
+            case "Norwegian":
+                translateAccro = "no";
+                break;
+            case "Persian":
+                translateAccro = "fa";
+                break;
+            case "Polish":
+                translateAccro = "pl";
+                break;
+            case "Portuguese":
+                translateAccro = "pt";
+                break;
+            case "Romanian":
+                translateAccro = "ro";
+                break;
+            case "Russian":
+                translateAccro = "ru";
+                break;
+            case "Serbian":
+                translateAccro = "sr";
+                break;
+            case "Slovak":
+                translateAccro = "sk";
+                break;
+            case "Slovenian":
+                translateAccro = "sl";
+                break;
+            case "Spanish":
+                translateAccro = "es";
+                break;
+            case "Swahili":
+                translateAccro = "sw";
+                break;
+            case "Swedish":
+                translateAccro = "sv";
+                break;
+            case "Tamil":
+                translateAccro = "ta";
+                break;
+            case "Telugu":
+                translateAccro = "te";
+                break;
+            case "Thai":
+                translateAccro = "th";
+                break;
+            case "Turkish":
+                translateAccro = "tr";
+                break;
+            case "Ukrainian":
+                translateAccro = "uk";
+                break;
+            case "Urdu":
+                translateAccro = "ur";
+                break;
+            case "Vietnamese":
+                translateAccro = "vi";
+                break;
+            case "Welsh":
+                translateAccro = "cy";
+                break;
+            case "Yiddish":
+                translateAccro = "yi";
+                break;
+            //default:
+               // translateAccro = "ru";
+        }
+
         Button selectImageButton = findViewById(R.id.select_image_button);
         img = findViewById(R.id.selected_image);
         labelResults = findViewById(R.id.tv_label_results);
         //textResults = findViewById(R.id.tv_texts_results);
-        localResults = findViewById(R.id.tv_local_results);
+        //localResults = findViewById(R.id.tv_local_results);
 
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,7 +462,7 @@ public class VisionActivity extends AppCompatActivity {
            protected void onPostExecute(BatchAnnotateImagesResponse response) {
                //textResults.setText(getDetectedTexts(response));
                labelResults.setText(getDetectedLabels(response));
-               localResults.setText(getDetectedLocals(response));
+               //localResults.setText(getDetectedLocals(response));
 
            }
        }.execute();
@@ -269,6 +472,9 @@ public class VisionActivity extends AppCompatActivity {
 
     private String getDetectedLabels(BatchAnnotateImagesResponse response){
         StringBuilder message = new StringBuilder("");
+        if (response == null){
+            return ("empty response\n");
+        }
         List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
         ArrayList<String> words = new ArrayList<>();
         if (labels != null) {
@@ -283,9 +489,9 @@ public class VisionActivity extends AppCompatActivity {
         }
         Translator t = new Translator();
         try{
-            ArrayList<String> translations = t.translate(words, "ru");
+            ArrayList<String> translations = t.translate(words, translateAccro);
             Log.e(TAG, translations.toString());
-            message.append(String.format(Locale.getDefault(), "%s\t -> \t %s", "English: ", "Russian: "));
+            message.append(String.format(Locale.getDefault(), "%s\t -> \t %s", "English: ", choice + ": "));
             message.append('\n');
             if (labels != null) {
                 int index = 0;
@@ -310,6 +516,9 @@ public class VisionActivity extends AppCompatActivity {
 
     private String getDetectedLocals(BatchAnnotateImagesResponse response){
         StringBuilder message = new StringBuilder("");
+        if(response ==  null){
+            return ("nothing\n");
+        }
         double[] x_indices = new double[4];
         double[] y_indices = new double[4];
         List<LocalizedObjectAnnotation> locals = response.getResponses().get(0).getLocalizedObjectAnnotations();

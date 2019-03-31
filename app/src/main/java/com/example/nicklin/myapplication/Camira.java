@@ -20,6 +20,7 @@ import java.util.Date;
 
 public class Camira extends AppCompatActivity {
 
+    String choice = "";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     String currentPhotoPath;
 
@@ -28,10 +29,13 @@ public class Camira extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camira);
 
+        Intent intent = getIntent();
+        choice = intent.getStringExtra("LANG");
 
 
-        Intent intent = new Intent(Camira.this, com.example.nicklin.myapplication.CameraFunction.class);
-        startActivity(intent);
+        Intent i = new Intent(Camira.this, com.example.nicklin.myapplication.CameraFunction.class);
+        i.putExtra("LANG", choice);
+        startActivity(i);
 
 
     }

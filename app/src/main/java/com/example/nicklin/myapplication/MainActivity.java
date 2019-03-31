@@ -39,6 +39,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
     public static String TAG = "Translation";
+    public String choice = "";
     private final String TRANSLATION_API_KEY = "AIzaSyDMGa7sbDrjFYtgCFG-CSzlDueXcFGmYy8";
     private View contentView;
     private View loadingView;
@@ -78,11 +79,15 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         //start activity on selection of any item you want, here I am assuming first item.
                         Intent intent = new Intent(MainActivity.this, Camira.class);
+                        choice = spinner.getSelectedItem().toString();
+                        intent.putExtra("LANG", choice);
                         startActivity(intent);
                         break;
 
 
                 }
+
+
 
 
             }
