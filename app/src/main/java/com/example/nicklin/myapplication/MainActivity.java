@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     default:
                         //start activity on selection of any item you want, here I am assuming first item.
-                        Intent intent = new Intent(MainActivity.this, com.example.nicklin.myapplication.CameraFunction.class);
+                        Intent intent = new Intent(MainActivity.this, Camira.class);
                         startActivity(intent);
                         break;
 
 
                 }
+
+
             }
 
             @Override
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void crossfade() {

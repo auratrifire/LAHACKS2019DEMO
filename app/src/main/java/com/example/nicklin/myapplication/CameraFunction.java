@@ -154,9 +154,11 @@ public class CameraFunction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        frameLayout = (FrameLayout) findViewById(R.id.camera_preview);
-        while (ContextCompat.checkSelfPermission(this,
+
+        setContentView(R.layout.activity_camira);
+        frameLayout = (FrameLayout)findViewById(R.id.main_camera);
+        while(ContextCompat.checkSelfPermission(this,
+
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
@@ -174,7 +176,7 @@ public class CameraFunction extends AppCompatActivity {
             cameraPreview = new CameraPreview(this, this.camera);
             frameLayout.addView(cameraPreview);
 
-            Button captureButton = (Button) findViewById(R.id.button_capture); //I don't know what the ID for the button is.
+            Button captureButton = (Button) findViewById(R.id.button); //I don't know what the ID for the button is.
             captureButton.setOnClickListener(
                     new View.OnClickListener() {
                         @Override

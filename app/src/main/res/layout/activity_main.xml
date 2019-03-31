@@ -53,11 +53,6 @@
             android:entries="@array/Languages"
             android:spinnerMode="dropdown" />
 
-        <FrameLayout
-            android:id="@+id/camera_preview"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
