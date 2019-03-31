@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_color"
-    tools:context=".MainActivity">
+    tools:context=".CameraFunction">
 
     <TextView
         android:id="@+id/loadingText"
@@ -52,10 +52,11 @@
             android:layout_height="wrap_content"
             android:entries="@array/Languages"
             android:spinnerMode="dropdown" />
+
         <FrameLayout
             android:id="@+id/camera_preview"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1" />
     </LinearLayout>
 

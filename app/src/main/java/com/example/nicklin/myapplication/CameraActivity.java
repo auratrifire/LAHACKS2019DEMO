@@ -1,3 +1,5 @@
+package com.example.nicklin.myapplication;
+
 import android.app.Activity;
 import android.hardware.Camera;
 import android.os.Bundle;
