@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 
 import android.support.annotation.NonNull;
@@ -27,31 +28,33 @@ import android.widget.Toast;
 
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 //import com.google.api.services.vision.v1.Vision;
 import com.google.api.client.json.GenericJson;
 //import com.google.api.services.vision.v1.VisionRequestInitializer;
+import com.google.api.services.translate.Translate;
+import com.google.api.services.translate.model.TranslationsListResponse;
 import com.google.api.services.vision.v1.model.*;
 import com.google.api.services.vision.v1.*;
+import android.os.StrictMode;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.services.translate.Translate;
+import com.google.api.services.translate.model.TranslationsListResponse;
 
-//import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
-//import com.google.cloud.vision.v1.LocalizedObjectAnnotation;
-//import com.google.cloud.vision.v1.NormalizedVertex;
-//import com.google.cloud.vision.v1.AnnotateImageRequest;
-//import com.google.api.services.vision.v1.model.AnnotateImageResponse;
-//import com.google.api.services.vision.v1.model.LocalizedObjectAnnotation;
-
-
-//import com.google.api.services.vision.v1.VisionRequestInitializer;
-//import com.google.api.services.vision.v1.model.AnnotateImageRequest;
-//import com.google.api.services.vision.v1.model.BatchAnnotateImagesRequest;
-//import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
-//import com.google.api.services.vision.v1.model.EntityAnnotation;
-//import com.google.api.services.vision.v1.model.Feature;
-//import com.google.api.services.vision.v1.model.Image;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.io.ByteArrayOutputStream;
 
@@ -96,7 +99,7 @@ public class VisionActivity extends AppCompatActivity {
 
         Button selectImageButton = findViewById(R.id.select_image_button);
         img = findViewById(R.id.selected_image);
-        //labelResults = findViewById(R.id.tv_label_results);
+        labelResults = findViewById(R.id.tv_label_results);
         //textResults = findViewById(R.id.tv_texts_results);
         localResults = findViewById(R.id.tv_local_results);
 
@@ -254,8 +257,9 @@ public class VisionActivity extends AppCompatActivity {
            }
            protected void onPostExecute(BatchAnnotateImagesResponse response) {
                //textResults.setText(getDetectedTexts(response));
-               //labelResults.setText(getDetectedLabels(response));
+               labelResults.setText(getDetectedLabels(response));
                localResults.setText(getDetectedLocals(response));
+
            }
        }.execute();
 
@@ -264,15 +268,24 @@ public class VisionActivity extends AppCompatActivity {
 
     private String getDetectedLabels(BatchAnnotateImagesResponse response){
         StringBuilder message = new StringBuilder("");
-        List<EntityAnnotation> labels = response.getResponses().get(1).getLabelAnnotations();
+        List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
+        ArrayList<String> words = new ArrayList<>();
         if (labels != null) {
             for (EntityAnnotation label : labels) {
                 message.append(String.format(Locale.getDefault(), "%.3f: %s",
                         label.getScore(), label.getDescription()));
                 message.append("\n");
+                words.add(label.getDescription());
             }
         } else {
             message.append("nothing\n");
+        }
+        Translator t = new Translator();
+        try{
+            ArrayList<String> ans = t.translate(words, "ru");
+            Log.e(TAG, ans.toString());
+        } catch (IOException e){
+            Log.e(TAG, e.toString());
         }
 
 
@@ -366,5 +379,57 @@ public class VisionActivity extends AppCompatActivity {
         image.encodeContent(imageBytes);
         return image;
     }
+
+
+    private class Translator {
+
+        public void try_translation(){
+            try {
+                ArrayList<String> ans = new ArrayList<> ();
+                ArrayList<String> arr = new ArrayList<String>();
+                arr.add("a ;dskfa;sdkf;adsk");
+                arr.add("World");
+                arr.add("Mom");
+                String tar = "ru";
+                ans = translate(arr, tar);
+                Log.e(TAG, ans.toString());
+            }
+            catch (IOException e) {
+                Log.e(TAG, e.toString());
+            }
+
+        }
+
+        private ArrayList<String> translate(ArrayList<String> arr, String tar) throws IOException {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            String key = "AIzaSyBRoIxDjqFtCcrvkwkmqE6Hd2vmQt7-8Oo";
+            // Set up the HTTP transport and JSON factory
+            HttpTransport httpTransport = new NetHttpTransport();
+            JsonFactory jsonFactory = AndroidJsonFactory.getDefaultInstance();
+            Translate.Builder translateBuilder = new Translate.Builder(httpTransport, jsonFactory, null);
+            translateBuilder.setApplicationName(getString(R.string.app_name));
+            Translate translate = translateBuilder.build();
+            ArrayList<String> q = arr;
+            ArrayList<String> responseList = new ArrayList<>();
+            for(int i = 0; i < q.size(); i++)
+            {
+                Translate.Translations.List list = translate.translations().list(q, tar);
+                list.setKey(key);
+                list.setSource("en");
+                TranslationsListResponse translateResponse = list.execute();
+                String response = translateResponse.getTranslations().get(i).getTranslatedText();
+                responseList.add(response);
+            }
+            for (int i = 0; i < responseList.size(); i++)
+            {
+                Log.d(TAG, responseList.get(i));
+            }
+            return responseList;
+        }
+    }
+
+
+
 
 }

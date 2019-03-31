@@ -28,22 +28,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
-    <!--<TextView-->
-        <!--android:id="@+id/labels"-->
-        <!--android:text="Labels:"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/selected_image"-->
-        <!--android:layout_marginTop="10dp"/>-->
+    <TextView
+        android:id="@+id/labels"
+        android:text="Labels:"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selected_image"
+        android:layout_marginTop="10dp"/>
 
-    <!--<TextView-->
-        <!--android:id="@+id/tv_label_results"-->
-        <!--android:text="-"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/labels"-->
-        <!--android:layout_marginTop="10dp"/>-->
+    <TextView
+        android:id="@+id/tv_label_results"
+        android:text="-"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labels"
+        android:layout_marginTop="10dp"/>
 
     <!--<TextView-->
         <!--android:id="@+id/texts"-->
@@ -68,7 +68,7 @@
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/selected_image"
+        android:layout_below="@+id/tv_label_results"
         android:layout_marginTop="10dp"/>
 
     <TextView
