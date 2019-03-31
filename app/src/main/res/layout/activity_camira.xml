@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Camira">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="73dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/gallery"
-        android:text="@string/galleryButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="250dp"
@@ -30,6 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/galleryButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="73dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/gallery"
+        android:onClick="clickGalleryButton"
+        android:text="@string/galleryButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/button"

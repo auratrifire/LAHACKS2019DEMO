@@ -2,6 +2,7 @@ package com.example.nicklin.myapplication;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.hardware.Camera;
@@ -192,6 +193,14 @@ public class CameraFunction extends AppCompatActivity {
 
         }
 
+        Button gallery_button = findViewById(R.id.galleryButton);
+        gallery_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CameraFunction.this, VisionActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

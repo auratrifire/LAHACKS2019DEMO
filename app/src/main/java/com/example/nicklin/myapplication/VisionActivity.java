@@ -118,7 +118,7 @@ public class VisionActivity extends AppCompatActivity {
     }
 
 
-    private void checkPermissions(){
+    public void checkPermissions(){
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)

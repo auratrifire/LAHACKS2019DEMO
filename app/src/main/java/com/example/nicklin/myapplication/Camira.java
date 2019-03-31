@@ -28,6 +28,8 @@ public class Camira extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camira);
 
+
+
         Intent intent = new Intent(Camira.this, com.example.nicklin.myapplication.CameraFunction.class);
         startActivity(intent);
 
@@ -88,5 +90,11 @@ public class Camira extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+
+
+    public void clickGalleryButton(View v){
+
+
     }
 }

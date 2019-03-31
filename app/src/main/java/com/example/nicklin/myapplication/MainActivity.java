@@ -49,44 +49,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    }
-
-    public void sendMessage(View view) throws IOException {
-//        Log.e(TAG, "About to create the HTTP Transport");
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
-//        HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
-//        JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
-//        Log.e(TAG, "About to initialize a translation object");
-//        TranslateRequestInitializer requestInitializer = new TranslateRequestInitializer(TRANSLATION_API_KEY);
-//
-//        Translate.Builder builder = new Translate.Builder(httpTransport, jsonFactory, null);
-//
-//        builder.setTranslateRequestInitializer(requestInitializer);
-//        Translate translate = builder.build();
-//
-//        //List<TranslateTextRequest> translateList = new ArrayList<>();
-//        TranslateTextRequest translateRequest = new TranslateTextRequest();
-//        translateRequest.setQ(Arrays.asList("Hola"));
-//        translateRequest.setFormat("String");
-//        translateRequest.setModel("String");
-//        translateRequest.setSource("SP");
-//        translateRequest.setTarget("ES");
-//
-//        Log.e(TAG, translateRequest.toString());
-//        Translate.Translations.TranslateOperation annotateRequest = translate.translations().translate(translateRequest);
-//        TranslationsListResponse response = annotateRequest.execute();
-
-//        for(TranslationsResource translationsResource: response.getTranslations()){
-//            Log.e(TAG, translationsResource.getTranslatedText());
-//        }
 
 
-        Intent intent = new Intent(this, VisionActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+
       
       
         contentView = findViewById(R.id.landingPage);
@@ -128,6 +93,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void sendMessage(View view) throws IOException {
+//        Log.e(TAG, "About to create the HTTP Transport");
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
+//        HttpTransport httpTransport = AndroidHttp.newCompatibleTransport();
+//        JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+//        Log.e(TAG, "About to initialize a translation object");
+//        TranslateRequestInitializer requestInitializer = new TranslateRequestInitializer(TRANSLATION_API_KEY);
+//
+//        Translate.Builder builder = new Translate.Builder(httpTransport, jsonFactory, null);
+//
+//        builder.setTranslateRequestInitializer(requestInitializer);
+//        Translate translate = builder.build();
+//
+//        //List<TranslateTextRequest> translateList = new ArrayList<>();
+//        TranslateTextRequest translateRequest = new TranslateTextRequest();
+//        translateRequest.setQ(Arrays.asList("Hola"));
+//        translateRequest.setFormat("String");
+//        translateRequest.setModel("String");
+//        translateRequest.setSource("SP");
+//        translateRequest.setTarget("ES");
+//
+//        Log.e(TAG, translateRequest.toString());
+//        Translate.Translations.TranslateOperation annotateRequest = translate.translations().translate(translateRequest);
+//        TranslationsListResponse response = annotateRequest.execute();
+
+//        for(TranslationsResource translationsResource: response.getTranslations()){
+//            Log.e(TAG, translationsResource.getTranslatedText());
+
+        Intent intent = new Intent(this, VisionActivity.class);
+        startActivity(intent);
     }
 
     private void crossfade() {
