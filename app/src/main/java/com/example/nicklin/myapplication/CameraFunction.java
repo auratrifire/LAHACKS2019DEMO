@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
-public class MainActivity extends AppCompatActivity {
+public class CameraFunction extends AppCompatActivity {
 
     Camera camera;
     CameraPreview cameraPreview;

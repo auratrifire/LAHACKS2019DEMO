@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     default:
                         //start activity on selection of any item you want, here I am assuming first item.
-                        Intent intent = new Intent(MainActivity.this, chooseLanguage.class);
+                        Intent intent = new Intent(MainActivity.this, com.example.nicklin.myapplication.CameraFunction.class);
                         startActivity(intent);
                         break;
 
