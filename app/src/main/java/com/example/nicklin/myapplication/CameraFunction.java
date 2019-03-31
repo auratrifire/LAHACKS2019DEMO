@@ -106,8 +106,8 @@ public class CameraFunction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        frameLayout = (FrameLayout)findViewById(R.id.camera_preview);
+        setContentView(R.layout.activity_camira);
+        frameLayout = (FrameLayout)findViewById(R.id.main_camera);
         while(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED)
