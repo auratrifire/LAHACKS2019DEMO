@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:onClick="sendMessage"
         android:text="@string/button_send"
         app:layout_constraintStart_toEndOf="@+id/editText"
         tools:layout_editor_absoluteY="16dp" />
