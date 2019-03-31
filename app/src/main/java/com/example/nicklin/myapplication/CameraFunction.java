@@ -183,6 +183,8 @@ public class CameraFunction extends AppCompatActivity {
                         public void onClick(View v) {
                             // get an image from the camera
                             camera.takePicture(null, null, mPicture);
+                            camera.stopPreview();
+                            camera.startPreview();
                         }
                     }
             );
