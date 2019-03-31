@@ -15,9 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:fontFamily="@font/comfortaa_bold"
         android:gravity="center"
         android:text="Selected Image "
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -36,18 +37,8 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/comfortaa_bold"
         android:text="Labels:"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_label_results"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/labels"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="-"
-        android:textSize="18sp" />
 
     <!--<TextView-->
     <!--android:id="@+id/texts"-->
@@ -92,6 +83,31 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/round_button"
         android:text="Choose an Image" />
+
+    <ScrollView
+        android:layout_width="393dp"
+        android:layout_height="523dp"
+        android:layout_below="@+id/labels"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="62dp"
+        android:scrollbarStyle="insideOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_label_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
