@@ -494,6 +494,7 @@ public class VisionActivity extends AppCompatActivity {
             Log.e(TAG, translations.toString());
             message.append(String.format(Locale.getDefault(), "%s\t -> \t %s", "English: ", choice + ": "));
             message.append('\n');
+            message.append('\n');
             if (labels != null) {
                 int index = 0;
                 for (EntityAnnotation label : labels) {
@@ -503,7 +504,7 @@ public class VisionActivity extends AppCompatActivity {
                     index++;
                 }
             } else {
-                message.append("nothing\n");
+                message.append("Nothing Detected\n");
             }
         } catch (IOException e){
             Log.e(TAG, e.toString());
