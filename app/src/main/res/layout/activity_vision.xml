@@ -46,21 +46,21 @@
         android:layout_marginTop="10dp"/>
 
     <!--<TextView-->
-        <!--android:id="@+id/texts"-->
-        <!--android:text="Texts:"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/tv_label_results"-->
-        <!--android:layout_marginTop="10dp"/>-->
+    <!--android:id="@+id/texts"-->
+    <!--android:text="Texts:"-->
+    <!--android:textStyle="bold"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/tv_label_results"-->
+    <!--android:layout_marginTop="10dp"/>-->
 
     <!--<TextView-->
-        <!--android:id="@+id/tv_texts_results"-->
-        <!--android:text="-"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/texts"-->
-        <!--android:layout_marginTop="10dp"/>-->
+    <!--android:id="@+id/tv_texts_results"-->
+    <!--android:text="-"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/texts"-->
+    <!--android:layout_marginTop="10dp"/>-->
 
     <TextView
         android:id="@+id/locals"
@@ -87,4 +87,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Choose an Image"/>
+
+
+
+
 </RelativeLayout>

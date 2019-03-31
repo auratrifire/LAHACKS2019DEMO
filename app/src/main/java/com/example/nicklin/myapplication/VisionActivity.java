@@ -80,6 +80,7 @@ public class VisionActivity extends AppCompatActivity {
     private static final int MAX_DIMENSION = 1200;
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String LANGUAGE = "ru";
     private static final int GALLERY_PERMISSIONS_REQUEST = 0;
     private static final int GALLERY_IMAGE_REQUEST = 1;
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
@@ -272,21 +273,36 @@ public class VisionActivity extends AppCompatActivity {
         ArrayList<String> words = new ArrayList<>();
         if (labels != null) {
             for (EntityAnnotation label : labels) {
-                message.append(String.format(Locale.getDefault(), "%.3f: %s",
-                        label.getScore(), label.getDescription()));
-                message.append("\n");
+//                message.append(String.format(Locale.getDefault(), "%.3f: %s",
+//                        label.getScore(), label.getDescription()));
+//                message.append("\n");
                 words.add(label.getDescription());
             }
         } else {
-            message.append("nothing\n");
+            return ("nothing\n");
         }
         Translator t = new Translator();
         try{
-            ArrayList<String> ans = t.translate(words, "ru");
-            Log.e(TAG, ans.toString());
+            ArrayList<String> translations = t.translate(words, "ru");
+            Log.e(TAG, translations.toString());
+            message.append(String.format(Locale.getDefault(), "%s\t -> \t %s", "English: ", "Russian: "));
+            message.append('\n');
+            if (labels != null) {
+                int index = 0;
+                for (EntityAnnotation label : labels) {
+                    message.append(String.format(Locale.getDefault(), "%s\t -> \t%s",
+                            label.getDescription(), translations.get(index)));
+                    message.append("\n");
+                    index++;
+                }
+            } else {
+                message.append("nothing\n");
+            }
         } catch (IOException e){
             Log.e(TAG, e.toString());
         }
+
+
 
 
         return message.toString();
