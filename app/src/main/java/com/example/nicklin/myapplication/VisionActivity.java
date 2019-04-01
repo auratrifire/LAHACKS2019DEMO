@@ -20,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -94,6 +95,7 @@ public class VisionActivity extends AppCompatActivity {
     private ImageView img;
 
     public String choice = "";
+    Bitmap bitMap;
 
     private String translateAccro = "";
 
@@ -104,6 +106,8 @@ public class VisionActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         choice = i.getStringExtra("LANG");
+
+
 
         switch(choice){
             case "Afrikaans":
@@ -305,6 +309,11 @@ public class VisionActivity extends AppCompatActivity {
         Button selectImageButton = findViewById(R.id.select_image_button);
         img = findViewById(R.id.selected_image);
         labelResults = findViewById(R.id.tv_label_results);
+        if (!i.getStringExtra("PIC").equals("")){
+            bitMap = StringToBitMap(i.getStringExtra("PIC"));
+            callCloudVision(bitMap);
+            img.setImageBitmap(bitMap);
+        }
         //textResults = findViewById(R.id.tv_texts_results);
         //localResults = findViewById(R.id.tv_local_results);
 
@@ -492,7 +501,7 @@ public class VisionActivity extends AppCompatActivity {
         try{
             ArrayList<String> translations = t.translate(words, translateAccro);
             Log.e(TAG, translations.toString());
-            message.append(String.format(Locale.getDefault(), "%s\t -> \t %s", "English: ", choice + ": "));
+            message.append(String.format(Locale.getDefault(), "%s\t -> \t %s", "English ", choice + ": "));
             message.append('\n');
             message.append('\n');
             if (labels != null) {
@@ -656,7 +665,15 @@ public class VisionActivity extends AppCompatActivity {
         }
     }
 
-
-
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
 
 }
