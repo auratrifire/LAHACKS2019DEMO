@@ -7,33 +7,15 @@
     android:background="@drawable/background_color"
     tools:context=".CameraFunction">
 
-    <TextView
-        android:id="@+id/loadingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginLeft="134dp"
-        android:layout_marginTop="356dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginRight="135dp"
-        android:layout_marginBottom="356dp"
-        android:text="@string/landing_text"
-        android:textSize="30sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/landingPage"
         android:layout_width="395dp"
         android:layout_height="329dp"
         android:layout_marginTop="208dp"
         android:layout_marginBottom="194dp"
+        android:alpha="0"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +25,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
-            android:text="@string/string_start_learning_today"
-            android:textSize="24sp"
+            android:text="@string/start_learning"
+            android:textSize="30sp"
             app:fontFamily="@font/comfortaa_bold" />
 
         <Spinner
@@ -57,6 +39,20 @@
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="332dp"
+        android:text="@string/app_name"
+        android:textAllCaps="false"
+        android:textColor="@color/idk"
+        android:textSize="50sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

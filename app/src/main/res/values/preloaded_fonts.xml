@@ -2,5 +2,11 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/comfortaa_bold</item>
+        <item>@font/goblin_one</item>
+        <item>@font/gruppo</item>
+        <item>@font/gudea</item>
+        <item>@font/gudea_bold</item>
+        <item>@font/miriam_libre_bold</item>
+        <item>@font/viga</item>
     </array>
 </resources>

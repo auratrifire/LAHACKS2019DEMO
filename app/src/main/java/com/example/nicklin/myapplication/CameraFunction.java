@@ -206,6 +206,7 @@ public class CameraFunction extends AppCompatActivity {
                             camera.stopPreview();
                             camera.startPreview();
                             Log.e(TAG, "I took a picture");
+                            camera.release();
                             Intent intent = new Intent(CameraFunction.this, VisionActivity.class);
                             intent.putExtra("LANG", choice);
                             startActivity(intent);
@@ -215,8 +216,6 @@ public class CameraFunction extends AppCompatActivity {
 
 
         }
-
-
 
         Button gallery_button = findViewById(R.id.galleryButton);
         gallery_button.setOnClickListener(new View.OnClickListener() {
@@ -230,18 +229,15 @@ public class CameraFunction extends AppCompatActivity {
 
     }
 
-    public void storePicture(){
-
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Log.e(TAG, "this works");
-            ImageView img = findViewById(R.id.imageView3);
-            img.setVisibility(View.VISIBLE);
+            //ImageView img = findViewById(R.id.imageView3);
+            //img.setVisibility(View.VISIBLE);
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            img.setImageBitmap(imageBitmap);
+            //img.setImageBitmap(imageBitmap);
         }
 
     }

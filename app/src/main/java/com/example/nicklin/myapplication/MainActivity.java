@@ -1,5 +1,7 @@
 package com.example.nicklin.myapplication;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -13,9 +15,14 @@ import android.widget.EditText;
 import android.view.View;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.content.Intent;
+import android.widget.ArrayAdapter;
+import android.graphics.Typeface;
+import android.widget.TextView;
+import android.graphics.Color;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -41,39 +48,42 @@ public class MainActivity extends AppCompatActivity {
     public static String TAG = "Translation";
     public String choice = "";
     private final String TRANSLATION_API_KEY = "AIzaSyDMGa7sbDrjFYtgCFG-CSzlDueXcFGmYy8";
-    private View contentView;
+    private LinearLayout contentView;
     private View loadingView;
     private int shortAnimationDuration;
+    public Typeface tfavv;
+    String[] list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        list = getResources().getStringArray(R.array.Languages);
 
-
-
-      
-      
         contentView = findViewById(R.id.landingPage);
-        loadingView = findViewById(R.id.loadingText);
 
         // Initially hide the content view.
-        contentView.setVisibility(View.GONE);
-        loadingView.setVisibility(View.VISIBLE);
+        //contentView.setVisibility(View.GONE);
+        //contentView.setAlpha(0);
+
+        TextView title = findViewById(R.id.appTitle);
+        title.animate().translationYBy(-300).setDuration(3000).start();
+        contentView.animate().alphaBy(100).setDuration(10000).start();
 
 
         // Retrieve and cache the system's default "short" animation time.
         shortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_longAnimTime);
 
-        crossfade();
+        //crossfade();
 
         Spinner spinner = findViewById(R.id.spinner3);
+        spinner2meth();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch(position){
+                switch (position) {
                     case 0:
                         break;
                     default:
@@ -81,13 +91,12 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, Camira.class);
                         choice = spinner.getSelectedItem().toString();
                         intent.putExtra("LANG", choice);
+                        Log.e(TAG, "made it");
                         startActivity(intent);
                         break;
 
 
                 }
-
-
 
 
             }
@@ -100,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void sendMessage(View view) throws IOException {
+//  public void sendMessage(View view) throws IOException {
 //        Log.e(TAG, "About to create the HTTP Transport");
 //        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 //        StrictMode.setThreadPolicy(policy);
@@ -129,12 +138,12 @@ public class MainActivity extends AppCompatActivity {
 //        for(TranslationsResource translationsResource: response.getTranslations()){
 //            Log.e(TAG, translationsResource.getTranslatedText());
 
-        Intent intent = new Intent(this, VisionActivity.class);
-        startActivity(intent);
-    }
+//      Intent intent = new Intent(this, VisionActivity.class);
+//      startActivity(intent);
+//  }
 
     private void crossfade() {
-        loadingView.setAlpha(1f);
+        //loadingView.setAlpha(1f);
         // Set the content view to 0% opacity but visible, so that it is visible
         // (but fully transparent) during the animation.
         contentView.setAlpha(0f);
@@ -147,12 +156,25 @@ public class MainActivity extends AppCompatActivity {
         // Animate the loading view to 0% opacity. After the animation ends,
         // set its visibility to GONE as an optimization step (it won't
         // participate in layout passes, etc.)
-        loadingView.animate().alpha(0f).setDuration(shortAnimationDuration).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        loadingView.setVisibility(View.GONE);
-                    }
-                });
+//        loadingView.animate().alpha(0f).setDuration(shortAnimationDuration).setListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                loadingView.setVisibility(View.GONE);
+//            }
+//        });
+    }
+
+    public <ViewGroup> void spinner2meth() {
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner3);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list) {
+            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+                tfavv = Typeface.createFromAsset(getAssets(), "fonts/Avvaiyar.ttf");
+                TextView v = (TextView) super.getView(position, convertView, parent);
+                v.setTypeface(tfavv);
+                v.setTextColor(Color.RED);
+                v.setTextSize(35);
+                return v;
+            }
+        };
     }
 }
-
